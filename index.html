@@ -1,14 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Train schedules</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Train schedules</title>
 </head>
-<body>
-  
+<body class="container">
+  <header class="header">
+    <div class="jumbotron text-center text-white bg-dark">
+      <h1>Anytime is Train Time</h1>
+      <p>Choo Choo. Chee Chee.</p>
+    </div>
+  </header>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header text-white bg-primary">Current Train Schedule</div>
+        <div class="card-body">
+          <table id="employeeTable" class="table table-fixed">
+            <thead>
+              <tr class="row">
+                <th class="col">Train Name</th>
+                <th class="col">Destination</th>
+                <th class="col">Frequency (min)</th>
+                <th class="col">Next Arrival</th>
+                <th class="col">Minutes Away</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr>
+                <td class="col">Test Name</td>
+                <td class="col">Test Destination</td>
+                <td class="col">30</td>
+                <td class="col">14:45</td>
+                <td class="col">90</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header text-white bg-primary">Add Train</div>
+        <div class="card-body">
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              Train Name  <input type="text" id="trainNameInput" class="form-control" placeholder="Name">
+              Destination  <input type="text" id="trainDestinationInput" class="form-control" placeholder="Name">
+              First Train Time (HH:mm - military time)  <input type="text" id="firstTrainTimeInput" class="form-control" placeholder="Name">
+              Frequency  <input type="text" id="trainFrequencyInput" class="form-control" placeholder="Name">
+              <br>
+              <button type="submit" id="trainSubmit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script src="./assets/javascript/app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script src="./assets/javascript/app.js"></script>
 </html>
