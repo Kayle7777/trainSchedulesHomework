@@ -14,6 +14,11 @@ $("#randomTrain").click((e) => {
   e.preventDefault()
   dbSet();
 })
+$("#removeAllTrains").click((e) => {
+  e.preventDefault();
+  database.ref('trainSchedule').set(null);
+  $("#tableBody").empty();
+})
 
 let interval = setInterval(function() {
   database.ref('trainSchedule').once("value", (ss) => {
