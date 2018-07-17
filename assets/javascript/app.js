@@ -9,7 +9,7 @@ let firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 let database = firebase.database();
-
+$("#jumboClock").text(`${moment().format('HH:mm:ss')}`)
 $("#randomTrain").click((e) => {
   e.preventDefault()
   dbSet();
@@ -21,9 +21,10 @@ $("#removeAllTrains").click((e) => {
 })
 
 let interval = setInterval(function() {
+  $("#jumboClock").text(`${moment().format('HH:mm:ss')}`)
   database.ref('trainSchedule').once("value", (ss) => {
     ss.forEach((x) => {
-      if ('name' in x.val()) {
+      if ('name' in x.val() || x.val().minutesAway < 0) {
         database.ref("trainSchedule/"+x.key+"/minutesAway").set(moment(x.val().nextArrivalFormatted, 'HH:mm:ss').diff(moment(), 'm') + 1)
       } else {
         database.ref('trainSchedule/'+x.key).set(null);
@@ -35,9 +36,6 @@ let interval = setInterval(function() {
 database.ref('trainSchedule').on('value', (ss) => {
   $("#tableBody").empty();
   ss.forEach((x) => {
-    if (moment(x.val().nextArrivalFormatted, "HH:mm:ss").isBefore(moment())) {
-      database.ref('trainSchedule').child(x.key).set(null) && dbSet();
-    }
     $("#tableBody").prepend(`
       <tr>
         <td scope="row">${x.val().name}</td>
@@ -47,6 +45,9 @@ database.ref('trainSchedule').on('value', (ss) => {
         <td>${x.val().minutesAway}</td>
       </tr>
     `)
+    if (x.val().nextArrivalFormatted == moment().format('HH:mm')+':00') {
+      database.ref('trainSchedule').child(x.key).set(null);
+    }
   })
 })
 
@@ -65,6 +66,9 @@ class Train {
     trainTimesArr.map((x, i) => {
       if (x.isBefore(m)) {
         nextArrival = trainTimesArr[i+1];
+        if (nextArrival.format('HH:mm:ss') == "00:00:00") {
+          nextArrival = moment('23:59:59', "HH:mm:ss")
+        }
         minutesAway = nextArrival.diff(m, 'm')
       }
     })
