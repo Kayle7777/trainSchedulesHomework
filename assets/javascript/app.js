@@ -34,6 +34,9 @@ let interval = setInterval(function() {
 }, 1000)
 
 database.ref('trainSchedule').on('value', (ss) => {
+  if ($('.modal.show').length > 0) {
+    $('.modal.show').removeClass('fade').modal('hide')
+  }
   $("#tableBody").empty();
   let i = 0;
   ss.forEach((x) => {
@@ -43,16 +46,16 @@ database.ref('trainSchedule').on('value', (ss) => {
         <td scope="row">${x.val().name}</td>
         <td>${x.val().destination}</td>
         <td>${x.val().frequency}</td>
-        <td id="test${i}">${x.val().nextArrivalFormatted} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test${i}Modal"></td>
-        <td>${x.val().minutesAway}</td>
+        <td id="fbArr${i}">${x.val().nextArrivalFormatted} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fbArr${i}Modal"></td>
+        <td class="minsAway">${x.val().minutesAway}</td>
       </tr>
     `)
-    $(`#test${i}`).append(`
-      <div class="modal fade" id="test${i}Modal" tabindex="-1" role="dialog" aria-hidden="true">
+    $(`#fbArr${i}`).append(`
+      <div class="modal fade" id="fbArr${i}Modal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="test${i}ModalLabel">Full Train Schedule</h5>
+            <h5 class="modal-title" id="fbArr${i}ModalLabel">Full Train Schedule</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -96,6 +99,9 @@ class Train {
     nextArrivalFormatted = nextArrival.format('HH:mm:ss')
     trainTimesArr.forEach((x, i, tarr) => {
       tarr[i] = x.format('HH:mm:ss');
+      if (tarr[i] == nextArrivalFormatted) {
+        tarr[i] = `<strong>${nextArrivalFormatted}</strong> -- Next arrival`
+      }
     })
     return {names, trainTimesArr, trainFrequency, nextArrival, nextArrivalFormatted, minutesAway}
   }
