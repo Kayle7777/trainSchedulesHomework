@@ -24,7 +24,7 @@ let interval = setInterval(function() {
   $("#jumboClock").text(`${moment().format('HH:mm:ss')}`)
   database.ref('trainSchedule').once("value", (ss) => {
     ss.forEach((x) => {
-      if ('name' in x.val() || x.val().minutesAway < 0) {
+      if ('name' in x.val() && x.val().minutesAway > 0) {
         database.ref("trainSchedule/"+x.key+"/minutesAway").set(moment(x.val().nextArrivalFormatted, 'HH:mm:ss').diff(moment(), 'm') + 1)
       } else {
         database.ref('trainSchedule/'+x.key).set(null);
