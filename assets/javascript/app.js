@@ -35,16 +35,37 @@ let interval = setInterval(function() {
 
 database.ref('trainSchedule').on('value', (ss) => {
   $("#tableBody").empty();
+  let i = 0;
   ss.forEach((x) => {
+    i++;
     $("#tableBody").prepend(`
       <tr>
         <td scope="row">${x.val().name}</td>
         <td>${x.val().destination}</td>
         <td>${x.val().frequency}</td>
-        <td>${x.val().nextArrivalFormatted}</td>
+        <td id="test${i}">${x.val().nextArrivalFormatted} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="test${i}Modal"></td>
         <td>${x.val().minutesAway}</td>
       </tr>
     `)
+    $(`#test${i}`).append(`
+      <div class="modal fade" id="test${i}Modal" tabindex="-1" role="dialog" aria-labelledby="test${i}Label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="test${i}ModalLabel">Full Train Schedule</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ${x.val().trainTimes}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+      `)
     if (x.val().nextArrivalFormatted == moment().format('HH:mm')+':00') {
       database.ref('trainSchedule').child(x.key).set(null);
     }
@@ -73,7 +94,10 @@ class Train {
       }
     })
     nextArrivalFormatted = nextArrival.format('HH:mm:ss')
-    return {names, trainFrequency, nextArrival, nextArrivalFormatted, minutesAway}
+    trainTimesArr.forEach((x, i, tarr) => {
+      tarr[i] = x.format('HH:mm:ss');
+    })
+    return {names, trainTimesArr, trainFrequency, nextArrival, nextArrivalFormatted, minutesAway}
   }
 }
 function dbSet() {
@@ -84,7 +108,8 @@ function dbSet() {
     destination: nt.names.destination,
     frequency: nt.trainFrequency,
     nextArrivalFormatted: nt.nextArrivalFormatted,
-    minutesAway: nt.minutesAway + 1
+    minutesAway: nt.minutesAway + 1,
+    trainTimes: nt.trainTimesArr
   }
   mdb.push(obj)
 
