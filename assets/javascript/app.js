@@ -35,7 +35,7 @@ let interval = setInterval(function() {
 
 database.ref('trainSchedule').on('value', (ss) => {
   if ($('.modal.show').length > 0) {
-    $('.modal.show').removeClass('fade').modal('hide')
+    $('.modal.show').removeClass('fade').modal('hide');
   }
   $("#tableBody").empty();
   let i = 0;
@@ -55,7 +55,7 @@ database.ref('trainSchedule').on('value', (ss) => {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="fbArr${i}ModalLabel">Full Train Schedule</h5>
+            <p class="modal-title" id="fbArr${i}ModalLabel"><strong>${x.val().name}</strong> to <strong>${x.val().destination}</strong> Full Schedule</p>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
