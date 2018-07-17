@@ -43,12 +43,12 @@ database.ref('trainSchedule').on('value', (ss) => {
         <td scope="row">${x.val().name}</td>
         <td>${x.val().destination}</td>
         <td>${x.val().frequency}</td>
-        <td id="test${i}">${x.val().nextArrivalFormatted} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="test${i}Modal"></td>
+        <td id="test${i}">${x.val().nextArrivalFormatted} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test${i}Modal"></td>
         <td>${x.val().minutesAway}</td>
       </tr>
     `)
     $(`#test${i}`).append(`
-      <div class="modal fade" id="test${i}Modal" tabindex="-1" role="dialog" aria-labelledby="test${i}Label" aria-hidden="true">
+      <div class="modal fade" id="test${i}Modal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -58,7 +58,7 @@ database.ref('trainSchedule').on('value', (ss) => {
             </button>
           </div>
           <div class="modal-body">
-            ${x.val().trainTimes}
+            ${x.val().trainTimes.join("<br>")}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
