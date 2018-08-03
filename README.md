@@ -23,4 +23,4 @@ Heavily uses moment.js and Google Firebase to make a cool train scheduler. While
 * **Live webpage** - hosted on [Github Pages][github Pages]
 
 [github Repo]: https://github.com/Kayle7777/trainSchedulesHomework
-[github Pages]: https://kayle7777.github.io/trainSchedulesHomework/
+[github Pages]: https://kayle7777.github.io/trainSchedulesHomework
