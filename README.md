@@ -6,6 +6,16 @@ Heavily uses moment.js and Google Firebase to make a cool train scheduler. While
 
 * **Jesse Webb** - *All JS, html, CSS* - [Kayle7777](https://github.com/kayle7777)
 
+## Notable Concepts / Technologies Used
+
+* **jQuery**
+
+* **Moment.js**
+
+* **Google Firebase**
+
+* **Class / Object constructors**
+
 ## Links
 
 * **Code repository** - hosted on [Github][github Repo]
