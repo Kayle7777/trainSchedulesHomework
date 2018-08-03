@@ -1,6 +1,6 @@
 # Train Schedules!
 
-This is my 7th week homework!! :)
+Heavily uses moment.js and Google Firebase to make a cool train scheduler. While loops / modulos to make a schedule that evenly divided into a regular day, but is still random.
 
 ## Authors
 
