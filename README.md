@@ -10,7 +10,7 @@ This is my 7th week homework!! :)
 
 * **Code repository** - hosted on [Github][github Repo]
 
-* **Live webpage** - hosted on [Githug Pages][github Pages]
+* **Live webpage** - hosted on [Github Pages][github Pages]
 
 [github Repo]: https://github.com/Kayle7777/trainSchedulesHomework
 [github Pages]: https://kayle7777.github.io/trainSchedulesHomework/
