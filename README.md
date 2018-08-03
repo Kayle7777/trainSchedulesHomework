@@ -16,6 +16,8 @@ Heavily uses moment.js and Google Firebase to make a cool train scheduler. While
 
 * **Class / Object constructors**
 
+* **Bootstrap**
+
 ## Links
 
 * **Code repository** - hosted on [Github][github Repo]
