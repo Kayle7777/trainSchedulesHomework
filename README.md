@@ -6,7 +6,7 @@ Uses moment.js and Google Firebase to make a cool train scheduler. While loops /
 
 * __Jesse Webb__ => _All JS, html, CSS_ => [Kayle7777](https://github.com/kayle7777)
 
-* ****
+****
 
 ## Links
 
